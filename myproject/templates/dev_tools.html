@@ -1,0 +1,77 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}Dev Tools{% endblock %}
+
+{% block head_content %}
+	<link href='http://fonts.googleapis.com/css?family=Original+Surfer|Handlee' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		/* Sticky footer styles
+		-------------------------------------------------- */
+		body {
+			margin-bottom: 25px;
+		}
+
+		/* Custom styles
+		-------------------------------------------------- */
+		@media (max-width: 767px) {
+			.navbar {
+				margin-bottom: 20px;
+			}
+		}
+
+		h3, h2, h1 {
+			font-family: 'Original Surfer', cursive;
+			direction: ltr !important;
+		}
+
+		p.text {
+			font-family: 'Handlee', cursive !important;
+			direction: ltr !important;
+		}
+
+		a {
+			text-decoration: none !important;
+			color: #333 !important;
+			-webkit-transition: opacity 400ms ease-in !important;
+			-moz-transition: opacity 400ms ease-in !important;
+			-ms-transition: opacity 400ms ease-in !important;
+			-o-transition: opacity 400ms ease-in !important;
+			transition: opacity 400ms ease-in !important;
+		}
+		a:hover {
+			opacity: 0.7 !important;
+		}
+
+		p.text {
+			font-size: 22px;
+		}
+	</style>
+	<script type="text/javascript">
+		var stickFooterToBottom = function() {
+			var top = $(".footer_seperator").position().top;
+			var mh = $(window).height();
+			var dh = mh - top - 60 - 25 - $("div.footer").height();
+			if (dh < 0) dh = 0;
+			$(".footer_seperator").height(dh);
+		};
+		
+		jQuery(window).load(stickFooterToBottom);
+		jQuery(window).resize(stickFooterToBottom);
+	</script>
+{% endblock %}
+
+
+{% block body_content %}
+	<h1>Development Tools</h1>
+	<hr/>
+	<div class="row">
+		<div class="col-xs-12">
+			<a href="/tools/cpv"><h3>Color Palette Visualizer</h3></a>
+		</div>
+	</div>
+
+	<div class="row footer_seperator">
+		<div class="col-xs-12"></div>
+	</div>
+{% endblock %}

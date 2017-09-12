@@ -1,0 +1,173 @@
+
+body {
+    /*padding-top: 70px;  Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+.page-header {
+	text-align: right;
+	border: 0;
+}
+
+.other_projects {
+	margin-top: 30px;
+}
+
+.main-header {
+	margin-top: 0px;
+}
+
+.game_desc_content {
+    direction: rtl;
+}
+
+.game-desc {
+	text-align: right;
+}
+
+span.text {
+	font-size: 22px;
+	text-align: center;
+}
+
+.table-borderless {
+	/*border: 1px solid #000;*/
+	-webkit-box-shadow: 3px 3px 13px 3px rgba(200,200,201,0.9);
+	box-shadow: 3px 3px 13px 3px rgba(200,200,201,0.9);
+}
+
+img.screenshot {
+	margin: 0 auto; 
+	max-height: 500px;
+	max-width: 900px;
+}
+
+span.english_text{
+	font-size: 18px;
+	line-height: 2em;
+}
+
+table.markets a {
+	text-decoration: none;
+	color: rgba(0, 0, 0, 0.55);
+	
+	transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+table.markets a.available:hover {
+   color: rgba(0, 0, 0, 1);
+}
+table.markets a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+
+.appstore_logo
+{
+	background-image: url('/media/pbtgames_fa/img/appstore.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.nappstore_logo
+{
+	background-image: url('/media/pbtgames_fa/img/no_appstore.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.gp_logo
+{
+	background-image: url('/media/pbtgames_fa/img/gp.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.ngp_logo
+{
+	background-image: url('/media/pbtgames_fa/img/no_gp.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.bazaar_logo
+{
+	background-image: url('/media/pbtgames_fa/img/bazaar.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.nbazaar_logo
+{
+	background-image: url('/media/pbtgames_fa/img/no_bazaar.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.sibche_logo
+{
+	background-image: url('/media/pbtgames_fa/img/sibche.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.nsibche_logo
+{
+	background-image: url('/media/pbtgames_fa/img/no_sibche.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+.nsibche_en_logo
+{
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	padding-left: 32px;  /* width of the image plus a little extra padding */
+	display: block;  /* may not need this, but I've found I do */
+}
+
+h3.game_name {
+	margin: 0;
+}
+
+body {
+  margin-bottom: 25px;
+}
+
+.gplusone {
+    display: inline-block;
+    position: relative;
+    float: left !important; 
+    /*margin-right: 13px !important;*/
+}
+
+div.name_likes_row {
+    margin: 0;
+    padding: 0;
+}
+
+div.left_col {
+    padding-left: 0 !important;
+}
+div.right_col {
+    padding-right: 0 !important;
+}
+
+div.name_likes_row {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}

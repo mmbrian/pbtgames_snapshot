@@ -1,0 +1,259 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block head_content %}
+	<style type="text/css">
+		/* Sticky footer styles
+		-------------------------------------------------- */
+		body {
+		  margin-bottom: 25px;
+		}
+
+		/* Custom styles
+		-------------------------------------------------- */
+		@media (max-width: 767px) {
+			.navbar {
+				margin-bottom: 20px;
+			}
+		}
+
+		{% if en %}
+		{% else %}
+		.form-control, div.checkbox {
+			direction: rtl !important;
+		}
+        @font-face {
+			font-family: 'Roya';
+			font-weight:normal;
+			font-style:normal;
+			src:url("{% static "fonts/Roya-Regular.eot?#" %}");
+			src:url("{% static "fonts/Roya-Regular.eot?#iefix" %}") format("embedded-opentype"),
+				url("{% static "fonts/Roya-Regular.woff" %}") format("woff"),
+				url("{% static "fonts/Roya-Regular.ttf" %}") format("truetype"),
+				url("{% static "fonts/Roya-Regular.svg#Roya" %}") format("svg");
+		}
+		@font-face {
+			font-family: 'Roya';
+			font-weight:bold;
+			font-style:normal;
+			src:url("{% static "fonts/Roya-Bold.eot?#" %}");
+			src:url("{% static "fonts/Roya-Bold.eot?#iefix" %}") format("embedded-opentype"),
+				url("{% static "fonts/Roya-Bold.woff" %}") format("woff"),
+				url("{% static "fonts/Roya-Bold.ttf" %}") format("truetype"),
+				url("{% static "fonts/Roya-Bold.svg#Roya" %}") format("svg");
+		}
+		{% endif %}
+
+		{% if post_submit %}
+		p.en_text {
+			font-family: 'Varela Round', sans-serif !important;
+			text-align: center;
+		}
+		p.fa_text {
+			font-family: 'Roya' !important;
+			font-weight: bold !important;
+			direction: rtl;
+			text-align: center;
+		}
+		{% else %}
+		form div[class^='col'], form div[class*=' col'] {
+			margin-bottom: 13px;
+		}
+
+		input {
+			border: 3px solid #CCC !important;
+			background-color: rgba(0, 0, 0, 0.05) !important;
+
+			{% if en %}
+			font-family: 'Varela Round', sans-serif !important;
+			{% else %}
+			font-family: 'Roya' !important;
+			font-weight: bold !important;
+			{% endif %}
+		}
+
+		input, textarea, div.checkbox {
+			border-radius: 0 !important;
+		}
+
+		input[type="submit"] {
+			color: #000 !important;
+			-webkit-transition: all 0.5s ease !important;
+			-moz-transition: all 0.5s ease !important;
+			-ms-transition: all 0.5s ease !important;
+			-o-transition: all 0.5s ease !important;
+			transition: all 0.5s ease !important;
+		}
+		input[type="submit"]:hover {
+			background-color: #CCC !important;
+			/*color: #FFF !important;*/
+		}
+
+		textarea, div.checkbox {
+			border: 3px solid #CCC !important;
+			background-color: rgba(0, 0, 0, 0.05) !important;
+		}
+
+		textarea, .checkbox label {
+			{% if en %}
+			font-family: 'Varela Round', sans-serif !important;
+			{% else %}
+			font-family: 'Roya' !important;
+			font-weight: bold !important;
+			{% endif %}	
+		}
+
+		div.checkbox {
+			border: 0px solid #CCC !important;
+			padding: 7px;
+		}
+		{% endif %}
+	</style>
+	<script type="text/javascript">
+		var stickFooterToBottom = function() {
+			var ctop = $(".top_centerizor").position().top;
+			var fh = $(".contact_form").height();
+			var mh = $(window).height();
+
+			var ch = (mh - fh) / 2 - ctop;
+			if (ch < 0) ch = 0;
+			$(".top_centerizor").height(ch);
+
+			var top = $(".footer_seperator").position().top;
+			
+			var dh = mh - top - 60 - 25 - $("div.footer").height();
+			if (dh < 0) dh = 0;
+			$(".footer_seperator").height(dh);
+		};
+		jQuery(window).load(stickFooterToBottom);
+
+		{% if post_submit %}
+		{% else %}
+		var modifyExpression = function() {
+			{% if en %}
+			var plus = "plus";
+			var minus = "minus";
+			var equals = "equals";
+			var question_mark = "?";
+			{% else %}
+			var plus = "بعلاوه ی";
+			var minus = "منهای";
+			var equals = "برابر است با";
+			var question_mark = "؟";
+			{% endif %}
+
+			var tmp = $("input#captcha").attr("placeholder");
+			$("input#captcha").attr({"placeholder": tmp.replace("+", plus).replace("-", minus).replace("=", equals).replace("?", question_mark)})
+		};
+		jQuery(window).load(modifyExpression);
+		{% endif %}
+		jQuery(window).resize(stickFooterToBottom);
+	</script>
+{% endblock %}
+
+{% block body_content %}
+	<div class="row top_centerizor">
+		<div class="col-xs-12"></div>
+	</div>
+	<div class="row contact_form">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+			<form role="form" name="contact_form" action="pdf" method="post" id="contact_form">
+				{% if post_submit %}
+				{% for pdf_name, paragraph in final_results %}
+					<h3>{{ pdf_name }}</h3>
+					<p>{{ paragraph }}</p>
+					</hr>
+				{% endfor %}
+				{% else %}
+				{% csrf_token %}
+				<div class="row">
+					{% if en %}
+					<div class="col-xs-12 col-md-4">
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="text" class="form-control" id="fullname" name="fullname"
+						placeholder="Your Full Name">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="text" class="form-control" id="email" name="email"
+						placeholder="Your Email Address">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="text" class="form-control" id="captcha" name="captcha"
+						placeholder="{{ math_expression }}">
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-8">
+						<textarea class="form-control" rows="6" id="message" name="message"
+						placeholder="Your Message Here..."></textarea>
+					</div>
+					{% else %}
+					<div class="col-xs-12 col-md-8">
+						<textarea class="form-control" rows="6" id="message" name="message"
+						placeholder="جستجو..."></textarea>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="text" class="form-control" id="fullname" name="fullname"
+						placeholder="">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="text" class="form-control" id="email" name="email"
+						placeholder="">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input type="text" class="form-control" id="captcha" name="captcha"
+						placeholder="{{ math_expression }}">
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+				<div class="row">
+					{% if en %}
+					<div class="col-xs-12 col-md-4 vcenter">
+						<input type="submit" class="btn btn-default form-control" value="Submit Letter">
+					</div><!--
+        --><div class="col-xs-12 col-md-8 vcenter">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="newsletter" checked> Subscribe to Our Newsletter
+							</label>
+						</div>
+					</div>
+					{% else %}
+					<div class="col-xs-12 col-md-8 vcenter">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="newsletter" checked>
+								<span style="padding-right: 20px;">
+								 
+								</span>
+							</label>
+						</div>
+					</div><!--
+        --><div class="col-xs-12 col-md-4 vcenter">
+						<input type="submit" class="btn btn-default form-control" value="جستجو کن">
+					</div>
+					{% endif %}
+				</div>
+				{% endif %}
+			</form>
+		</div>
+	</div>
+	<div class="row footer_seperator">
+		<div class="col-xs-12"></div>
+	</div>
+{% endblock %}

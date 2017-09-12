@@ -1,0 +1,320 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}PBTGames | {{ game.name }}{% endblock %}
+
+{% block head_content %}
+	<!-- Custom CSS -->
+    <link href="{% static "pbtgames_fa/css/game_page.css" %}" rel="stylesheet">
+
+    <link href="{% static "pbtgames_fa/css/colorbox.css" %}" rel="stylesheet">
+    <script src="{% static "pbtgames_fa/js/jquery.colorbox-min.js" %}"></script>
+
+    {% if en %}
+    <link href='http://fonts.googleapis.com/css?family=Original+Surfer|Handlee' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        @font-face {
+          font-family: 'Ziba';
+          src: url('{% static "fonts/BZiba.eot?#" %}') format('eot'),  /* IE6–8 */
+               url('{% static "fonts/BZiba.woff" %}') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+               url('{% static "fonts/BZiba.ttf" %}') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+        }
+    </style>
+    {% endif %}
+
+    <style type="text/css">
+        img.screenshot {
+            margin: 0 auto; 
+            max-height: 700px;
+            max-width: 500px;
+        }
+
+        {% if en %}
+        .page-header {
+            text-align: left;
+        }
+        .game-desc {
+            text-align: left;
+        }
+        h3 {
+            font-family: 'Original Surfer', cursive;
+        }
+        .game_desc_content, p.text {
+            direction: ltr;
+            font-family: 'Handlee', cursive;
+        }
+        {% endif %}
+    </style>
+
+    <!-- use jssor.slider.mini.js (40KB) or jssor.sliderc.mini.js (32KB, with caption, no slideshow) or jssor.sliders.mini.js (28KB, no caption, no slideshow) instead for release -->
+    <!-- jssor.slider.mini.js = jssor.sliderc.mini.js = jssor.sliders.mini.js = (jssor.js + jssor.slider.js) -->
+    <script type="text/javascript" src="{% static "pbtgames_fa/js/jssor.js" %}"></script>
+    <script type="text/javascript" src="{% static "pbtgames_fa/js/jssor.slider.js" %}"></script>
+    <script>
+        //Reference http://www.jssor.com/development/tip-make-responsive-slider.html
+
+        var _CaptionTransitions = [];
+        _CaptionTransitions["CLIP|L"] = { $Duration: 600, $Clip: 1, $Easing: $JssorEasing$.$EaseInOutCubic };
+        _CaptionTransitions["RTT|10"] = { $Duration: 600, $Zoom: 11, $Rotate: 1, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInExpo }, $Opacity: 2, $Round: { $Rotate: 0.8} };
+        _CaptionTransitions["ZMF|10"] = { $Duration: 600, $Zoom: 11, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 };
+        _CaptionTransitions["FLTTR|R"] = { $Duration: 600, x: -0.2, y: -0.1, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave }, $Opacity: 2, $Round: { $Top: 1.3} };
+    </script> 
+    <script>
+        jQuery(document).ready(function ($) {
+            //Reference http://www.jssor.com/development/tip-make-responsive-slider.html
+
+            var _CaptionTransitions = [];
+            _CaptionTransitions["CLIP|L"] = { $Duration: 600, $Clip: 1, $Easing: $JssorEasing$.$EaseInOutCubic };
+            _CaptionTransitions["RTT|10"] = { $Duration: 600, $Zoom: 11, $Rotate: 1, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInExpo }, $Opacity: 2, $Round: { $Rotate: 0.8} };
+            _CaptionTransitions["ZMF|10"] = { $Duration: 600, $Zoom: 11, $Easing: { $Zoom: $JssorEasing$.$EaseInExpo, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 };
+            _CaptionTransitions["FLTTR|R"] = { $Duration: 600, x: -0.2, y: -0.1, $Easing: { $Left: $JssorEasing$.$EaseLinear, $Top: $JssorEasing$.$EaseInWave }, $Opacity: 2, $Round: { $Top: 1.3} };
+
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0),
+
+                $CaptionSliderOptions: {                            //[Optional] Options which specifies how to animate caption
+                    $Class: $JssorCaptionSlider$,                   //[Required] Class to create instance to animate caption
+                    $CaptionTransitions: _CaptionTransitions,       //[Required] An array of caption transitions to play caption, see caption transition section at jssor slideshow transition builder
+                    $PlayInMode: 1,                                 //[Optional] 0 None (no play), 1 Chain (goes after main slide), 3 Chain Flatten (goes after main slide and flatten all caption animations), default value is 1
+                    $PlayOutMode: 3                                 //[Optional] 0 None (no play), 1 Chain (goes before main slide), 3 Chain Flatten (goes before main slide and flatten all caption animations), default value is 1
+                },
+				
+            };
+
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+
+				var parentElement = jssor_slider1.$Elmt.parentNode;
+			
+                //reserve blank width for margin+padding: margin+padding-left (10) + margin+padding-right (10)
+                var paddingWidth = 0;
+				//alert(jssor_slider1.$Elmt.attributes[0].nodeValue);
+
+                //minimum width should reserve for text
+                var minReserveWidth = 0;
+
+                
+
+                //evaluate parent container width
+                var parentWidth = parentElement.clientWidth;
+				var winW = $(window).width();
+                
+				if (parentWidth) {
+
+                    //exclude blank width
+                    var availableWidth = parentWidth - paddingWidth;
+
+                    //calculate slider width as 100% of available width
+                    var sliderWidth = availableWidth * 1;
+
+                    //slider width is maximum 768 - 2 x padding
+					var _max = (parentWidth / 12.) * 4 - 2 * paddingWidth;
+					if (parentWidth < 970) 
+						_max = 970 - 2 * paddingWidth;
+                    sliderWidth = Math.min(sliderWidth, _max);
+
+                    //slider width is minimum 0
+                    sliderWidth = Math.max(sliderWidth, 0);
+
+                    //evaluate free width for text, if the width is less than minReserveWidth then fill parent container
+                    if (availableWidth - sliderWidth < minReserveWidth) {
+
+                        //set slider width to available width
+                        sliderWidth = availableWidth;
+
+                        //slider width is minimum 200
+                        sliderWidth = Math.max(sliderWidth, 200);
+                    }
+
+                    jssor_slider1.$ScaleWidth(sliderWidth);
+                }
+                else
+                    window.setTimeout(ScaleSlider, 30);
+					
+				// extra code totally unrelated to slider just to be executed on window resize
+				// this is to handle description scroll
+				if (winW > 992 && winW < 1200) {
+                    properlyResizeGameDesc();
+				} else {
+					if (parentWidth < 970) {
+						$(".game_desc_content").removeAttr('style');
+					} else {
+                        properlyResizeGameDesc();
+					}
+				}
+            }
+
+            ScaleSlider();
+
+            //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+            //    $(window).bind('resize', ScaleSlider);
+            //}
+			$(window).bind("load", ScaleSlider);
+			$(window).bind("resize", ScaleSlider);
+			$(window).bind("orientationchange", ScaleSlider);
+
+            //if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
+            //    $(window).bind("orientationchange", ScaleSlider);
+            //}
+            //responsive code end
+
+            $("._screenshot").colorbox({rel:'_screenshot', transition:"fade", width:"85%", height:"85%"});
+        });
+
+        var properlyResizeGameDesc = function() {
+            var mh = $("#slider1_container").height();
+            var dh = mh - $("div.markets_row").height() - $("h3.game_name").height();
+            $("div.game_desc_content").height(dh);
+        };
+    </script>
+    <script type="text/javascript">
+      var stickFooterToBottom = function() {
+          var top = $(".footer_seperator").position().top;
+          var mh = $(window).height();
+          var dh = mh - top - 60 - 25 - $("div.footer").height();
+          if (dh < 0) dh = 0;
+          $(".footer_seperator").height(dh);
+      };
+
+      jQuery(window).load(stickFooterToBottom);
+      jQuery(window).resize(stickFooterToBottom);
+    </script>
+{% endblock %}
+
+{% block body_content %}
+<!-- Portfolio Item Row -->
+<div class="row">
+    <div id="slider1_container" class="col-sm-12 col-md-4 vcenter" style="width: 500px;
+    height: 700px; overflow: hidden; padding-left: 0;">
+        <div id="slider1_slides" u="slides" style="cursor: move; width: 500px; height: 700px;
+        overflow: hidden;">
+            {% for scr in game.screenshots.all %}
+            <div><a class="_screenshot" href="{{ scr.image.url }}"><img class="img-responsive screenshot" src="{{ scr.image.url }}" alt=""></a></div>
+            {% endfor %}
+        </div>
+    </div><!--
+	--><div class="col-sm-12 col-md-8 game-desc vcenter">
+        <div class="row desc_row">
+            <div class="col-md-12">
+                <div class="row name_likes_row">
+                    {% if en %}
+                    <div class="col-xs-12 col-md-8 col-lg-8 vcenter left_col">
+                        <h3 class="game_name">{{ game.name_en }}</h3>
+                    </div><!--
+                    --><div class="col-xs-12 col-md-0"><br/></div><!--
+                    --><div class="col-xs-6 col-md-1 col-lg-1 vcenter left_col right_col">
+                        <!-- GooglePlus Recommend -->
+                        <div class="gplusone">
+                            <!-- Place this tag where you want the +1 button to render. -->
+                            <div id="g-plusone" class="g-plusone" data-size="medium"></div>
+                        </div>
+                        <!-- End -->
+                    </div><!--
+                    --><div class="col-xs-6 col-md-3 col-lg-3 vcenter left_col right_col">
+                        <!-- Facebook Like & Share -->
+                        <div style="float: right !important;" class="fb-like" data-href="{{ game.facebook_like_embedded_link }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <!-- End -->
+                    </div>
+                    {% else %}
+                    <div class="col-xs-6 col-md-1 col-lg-1 vcenter left_col right_col">
+                        <!-- GooglePlus Recommend -->
+                        <div class="gplusone">
+                            <!-- Place this tag where you want the +1 button to render. -->
+                            <div id="g-plusone" class="g-plusone" data-size="medium"></div>
+                        </div>
+                        <!-- End -->
+                    </div><!--
+                    --><div class="col-xs-6 col-md-3 col-lg-3 vcenter left_col right_col">
+                        <!-- Facebook Like & Share -->
+                        <div style="float: right !important;" class="fb-like" data-href="{{ game.facebook_like_embedded_link }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <!-- End -->
+                    </div><!--
+                    --><div class="col-xs-12 col-md-0"><br/></div><!--
+                    --><div class="col-xs-12 col-md-8 col-lg-8 vcenter right_col">
+                        <h3 class="game_name">{{ game.name }}</h3>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="p-lg-horizontally-scrollable game_desc_content">
+                    <p class="text">{% if en %}{{ game.overview_en | safe }}{% else %}{{ game.overview | safe }}{% endif %}</p>
+                </div>
+            </div>
+        </div>                    
+        <div class="row markets_row">
+            <div class="col-md-12">
+                {% if en %}
+                <h3>Available On</h3>
+                {% else %}
+                <h3>قابل دانلود از</h3>
+                {% endif %}
+				<div class="table-responsive">
+				  <table class="table table-borderless markets">
+					<tr style="text-align: center;">
+                        {% if game.googleplay_link %}
+                            <td class=""><a href="{{game.googleplay_link}}" class="available"><span class="gp_logo english_text">Google Play</span></a></td>
+                        {% else %}
+                            <td class=""><a href="#" class="disabled"><span class="ngp_logo english_text">Google Play</span></a></td>
+                        {% endif %}
+						{% if game.appstore_link %}
+                            <td class=""><a href="{{game.appstore_link}}" class="available"><span class="appstore_logo english_text">App Store</span></a></td>
+                        {% else %}
+                            <td class=""><a href="#" class="disabled"><span class="nappstore_logo english_text">App Store</span></a></td>
+                        {% endif %}
+					</tr>
+					<tr style="text-align: center;">
+                        {% if game.bazaar_link %}
+                            <td class=""><a href="{{game.bazaar_link}}" class="available"><span class="bazaar_logo text">بازار</span></a></td>
+                        {% else %}
+                            <td class=""><a href="#" class="disabled"><span class="nbazaar_logo text">بازار</span></a></td>
+                        {% endif %}
+                        {% if en or force_hide_sibche %}
+                            <td class=""><a href="#" class="disabled"><span class="nsibche_en_logo text"></span></a></td>
+                        {% else %}
+                            {% if game.sibche_link %}
+                                <td class=""><a href="{{game.sibche_link}}" class="available"><span class="sibche_logo text">سیبچه</span></a></td>
+                            {% else %}
+                                <td class=""><a href="#" class="disabled"><span class="nsibche_logo text">سیبچه</span></a></td>
+                            {% endif %}
+                        {% endif %}
+					</tr>
+				  </table>
+				</div>
+            </div>
+        </div> 
+    </div>
+
+</div>
+<!-- /.row -->
+
+</hr>
+
+{% if recent_games %}
+<!-- Recent Games Row -->
+<div class="row recent_games_row">
+
+    <div class="col-lg-12">
+        {% if en %}
+        <h3 class="page-header other_projects">Our Latest Games</h3>
+        {% else %}
+        <h3 class="page-header other_projects">جدیدترین بازی هامون</h3>
+        {% endif %}
+    </div>
+
+    {% for game in recent_games %}
+    <div class="col-sm-3 col-xs-6">
+        <a href="/{% if en %}en{% else %}fa{% endif %}/{{ game.slug }}">
+            <img class="img-responsive portfolio-item" src="{{ game.icon.url }}" alt="{% if en %}{{ game.name_en }}{% else %}{{ game.name }}{% endif %}">
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+<!-- /.row -->
+{% endif %}
+<div class="row footer_seperator">
+  <div class="col-xs-12"></div>
+</div>
+{% endblock %}

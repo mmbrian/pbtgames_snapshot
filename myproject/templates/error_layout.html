@@ -1,0 +1,112 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block head_content %}
+	<script src="{% static "js/shine.min.js" %}"></script>
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet" type="text/css">
+
+	<style type="text/css">
+		/* Sticky footer styles
+		-------------------------------------------------- */
+		body {
+		  margin-bottom: 25px;
+		}
+
+		/* Custom styles
+		-------------------------------------------------- */
+		@media (max-width: 767px) {
+			.navbar {
+				margin-bottom: 20px;
+			}
+		}
+		h1, h3 {
+			text-align: center;
+		}
+
+		#error_code {
+		  margin: auto;
+		  position: absolute;
+		  top: 0; left: 0; bottom: 0; right: 0;
+		  width: 100%;
+
+		  display: table;
+		  height: auto;
+
+		  color: #fcfcfc;
+		  text-transform: uppercase;
+		  text-align: center;
+
+		  font-size: 8em;
+		  font-family: 'Open Sans', sans-serif;
+		  font-weight: 800;
+
+		  letter-spacing: -0.02em;
+		  line-height: 1.2em;
+		}
+	</style>
+	<script type="text/javascript">
+		var stickFooterToBottom = function() {
+			var ctop = $(".top_centerizor").position().top;
+			var fh = $(".main-error-content").height();
+			var mh = $(window).height();
+
+			var ch = (mh - fh) / 2 - ctop;
+			if (ch < 0) ch = 0;
+			$(".top_centerizor").height(ch);
+
+			var top = $(".footer_seperator").position().top;
+			
+			var dh = mh - top - 60 - 25 - $("div.footer").height();
+			if (dh < 0) dh = 0;
+			$(".footer_seperator").height(dh);
+		};
+
+		jQuery(window).load(stickFooterToBottom);
+		jQuery(window).resize(stickFooterToBottom);
+
+		jQuery(window).load(function() {
+			var shine = new Shine(document.getElementById('error_code'));
+			function handleMouseMove(event) {
+				shine.light.position.x = event.clientX;
+				shine.light.position.y = event.clientY;
+				shine.draw();
+			}
+
+			window.addEventListener('mousemove', handleMouseMove, false);
+			// function update() {
+			// 	window.requestAnimationFrame(update);
+			// 	var time = new Date().getTime();
+			// 	var speed = 0.00025;  // 1 = 1000 rotations/s
+			// 	var phase = time * speed * 2.0 * Math.PI;
+			// 	var radiusX = window.innerWidth * 0.5;
+			// 	var radiusY = window.innerHeight * 0.5;
+			// 	shine.light.position.x = radiusX + radiusX * Math.cos(phase);
+			// 	shine.light.position.y = radiusY + radiusY * Math.sin(phase * 0.7);
+			// 	shine.draw();
+			// }
+			// update();
+		});
+	</script>
+{% endblock %}
+
+{% block body_content %}
+	<div class="row top_centerizor">
+		<div class="col-xs-12"></div>
+	</div>
+	<div class="row main-error-content">
+		<div class="col-xs-8 col-xs-offset-2">
+			<h1 id="error_code">{% block error_code %}{% endblock %}</h1>
+		</div>
+	</div>
+	<!-- <div class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+			<h3>{% block error_message %}{% endblock %}</h3>
+		</div>
+	</div> -->
+	<div class="row footer_seperator">
+		<div class="col-xs-12"></div>
+	</div>
+{% endblock %}

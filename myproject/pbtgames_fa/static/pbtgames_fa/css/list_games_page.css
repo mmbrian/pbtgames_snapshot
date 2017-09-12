@@ -1,0 +1,32 @@
+
+.img-container {
+	/*background: #FF0;*/
+}
+
+.game_row:hover {
+	-webkit-box-shadow: 3px 3px 13px 3px rgba(200,200,201,0.9);
+	box-shadow: 3px 3px 13px 3px rgba(200,200,201,0.9);
+}
+
+a {
+	text-decoration: none;
+	color: rgba(0, 0, 0, 0.75);
+	
+	transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+a:hover {
+   text-decoration: none;	
+   color: rgba(0, 0, 0, 1.0);
+}
+
+.market_item {
+	padding: 7px;
+}
+
+p.text {
+	font-size: 22px;
+}

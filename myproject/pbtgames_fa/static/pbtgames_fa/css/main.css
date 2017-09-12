@@ -1,0 +1,50 @@
+
+div.description a {
+	text-decoration: none;
+	color: #000;
+}
+
+h1 {
+	font-family: 'Ziba';
+	font-weight: bold;
+	font-size: 3em;
+}
+
+p.text {
+	font-family: 'Ziba';
+	font-size: 1.5em;
+	text-align: justify;
+}
+ 
+body {
+	margin-top: 30px;
+	margin-bottom: 50px;
+	background: none;
+}
+
+div.description {
+	direction: rtl;
+	background-color: rgba(255, 255, 255, 0.9);
+	
+	-webkit-border-radius: 25px 25px 25px 25px;
+	border-radius: 25px 25px 25px 25px;
+	
+	/*-webkit-box-shadow: 4px 6px 25px 3px rgba(0,0,0,1);
+	box-shadow: 4px 6px 25px 3px rgba(0,0,0,1);*/
+	-webkit-box-shadow: 3px -3px 0px 4px rgba(200,200,201,0.9);
+	box-shadow: 3px -3px 0px 4px rgba(200,200,201,0.9);
+}
+
+@media (max-width: 767px) {
+	h1 {
+		font-size: 1.9em !important;
+	}
+
+	p.text {
+		font-size: 1.3em;
+	}
+
+	div.description {
+		background-color: rgba(255, 255, 255, 0.75);
+	}
+}

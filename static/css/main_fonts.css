@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Narm';
+  src: url('../fonts/BNarm.eot?#') format('eot'),  /* IE6–8 */
+       url('../fonts/BNarm.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('../fonts/BNarm.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+@font-face {
+  font-family: 'Ziba';
+  src: url('../fonts/BZiba.eot?#') format('eot'),  /* IE6–8 */
+       url('../fonts/BZiba.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('../fonts/BZiba.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+@font-face {
+  font-family: 'Morvarid';
+  src: url('../fonts/BMorvarid.eot?#') format('eot'),  /* IE6–8 */
+       url('../fonts/BMorvarid.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('../fonts/BMorvarid.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}

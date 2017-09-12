@@ -1,0 +1,60 @@
+.navbar {
+	opacity: .9;
+}
+
+ul.navbar-menu li a {
+	font-family: "Narm";
+	font-size: 22px;
+
+	-webkit-transition: color 500ms ease-in;
+	-moz-transition: color 500ms ease-in;
+	-ms-transition: color 500ms ease-in;
+	-o-transition: color 500ms ease-in;
+	transition: color 500ms ease-in;
+}
+
+.navbar-brand {
+	color: #FFFFFF !important;
+	/*font-family: 'Changa One', cursive;*/
+	/*font-family: 'Chewy', cursive;*/
+	font-family: 'Varela Round', sans-serif;
+
+	transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.navbar-brand:hover {
+	color: #777 !important;
+}
+
+.navbar-menu {
+	float: right; 
+}
+
+a.rightmost_menu_item  {
+	padding-right: 0 !important;
+}
+
+a.leftmost_menu_item  {
+	padding-left: 0 !important;
+}
+
+a.selected {
+	color: #FFFFFF !important;
+}
+
+@media (max-width: 767px) {
+	.navbar-menu {
+		float: right; 
+		direction: rtl;
+	}
+	a.rightmost_menu_item  {
+		padding-right: 15px !important;
+	}
+	a.leftmost_menu_item  {
+		padding-left: 15px !important;
+	}
+}

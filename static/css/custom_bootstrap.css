@@ -1,0 +1,43 @@
+
+/* images with this class will be centered in their container only on xs displays */
+.img-xs-centered {
+	margin: 0 0;
+}
+
+@media (max-width: 767px) {
+	.img-xs-centered {
+		margin: 0 auto;
+	}
+	
+	.navbar {
+		margin-bottom: 0;
+	}
+}
+
+.p-lg-horizontally-scrollable {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+@media (max-width: 991px) {
+	.p-lg-horizontally-scrollable {
+		overflow-y: visible;
+	}
+}
+
+
+.hcenter{
+	margin: 0 auto;
+	text-align: center;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+	float: none;
+}
+
+.table-borderless td,
+.table-borderless th {
+    border: 0 !important;
+}

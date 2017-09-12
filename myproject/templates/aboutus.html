@@ -1,0 +1,217 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block head_content %}
+	
+	<link href="{% static "css/paper-collapse.css" %}" rel="stylesheet">
+	<script src="{% static "js/paper-collapse.js" %}"></script>
+
+	{% if en %}
+    <link href='http://fonts.googleapis.com/css?family=Original+Surfer|Handlee' rel='stylesheet' type='text/css'>
+    {% endif %}
+
+	<style type="text/css">
+		/* Sticky footer styles
+		-------------------------------------------------- */
+		body {
+		  margin-bottom: 25px;
+		}
+
+		/* Custom styles
+		-------------------------------------------------- */
+		@media (max-width: 767px) {
+			.navbar {
+				margin-bottom: 20px;
+			}
+		}
+
+		.img-center {
+			margin: 0 auto;
+		}
+
+		.collapse-card .title strong {
+			margin-left: 0 !important;
+			font-size: 1.5em !important;
+			text-align: left !important;
+		}
+		.collapse-card {
+			position: absolute !important;
+			width: 95% !important;
+			padding: 2rem !important;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+		.collapse-card span {
+			font-size: 14px;
+		}
+
+		img {
+			cursor: pointer;
+			-webkit-transition:all 300ms ease-in-out;
+			-moz-transition:all 300ms ease-in-out;
+			transition:all 300ms ease-in-out;
+			-webkit-filter: grayscale(100%) blur(1px) opacity(0.8);
+	        -moz-filter: grayscale(100%) blur(1px) opacity(0.8);
+	        -o-filter: grayscale(100%) blur(1px) opacity(0.8);
+	        -ms-filter: grayscale(100%) blur(1px) opacity(0.8);
+	        filter: grayscale(100%) blur(1px) opacity(0.8);
+		}
+		img:hover, img.hovered{
+	        -webkit-filter: none;
+	        -moz-filter: none;
+	        -o-filter: none;
+	        -ms-filter: none;
+	        filter: none;
+		}
+
+		div.team-member {
+			min-height: 285px !important;
+		}
+
+		p.text a {
+			text-decoration: none;
+			color: #333;
+			-webkit-transition: opacity 400ms ease-in;
+			-moz-transition: opacity 400ms ease-in;
+			-ms-transition: opacity 400ms ease-in;
+			-o-transition: opacity 400ms ease-in;
+			transition: opacity 400ms ease-in;
+		}
+		p.text a:hover {
+			opacity: 0.7;
+		}
+
+		p.text {
+			font-size: 22px;
+		}
+		p.member-desc {
+			font-size: 16px;	
+		}
+
+		{% if en %}
+          h2, h1 {
+            font-family: 'Original Surfer', cursive;
+            direction: ltr !important;
+          }
+
+          p.text, .collapse-card {
+              font-family: 'Handlee', cursive !important;
+              direction: ltr !important;
+          }
+        {% else %}
+        	div.title span {
+        		float: left !important;
+        		margin-left: 0 !important;
+        		font-family: "Ziba" !important;
+        	}
+        	div.title strong {
+        		float: right !important;
+        		font-family: "Ziba" !important;
+        	}
+        	h1, h2 {
+        		direction: rtl !important;
+        		font-family: "Morvarid" !important;
+        	}
+        	p.member-desc {
+				font-size: 18px;	
+			}
+			.collapse-card .title strong {
+				font-size: 2.5em !important;
+			}
+			.collapse-card span {
+				font-size: 2em;
+			}
+			div.body {
+				clear: both !important;
+				margin-top: 25px !important;
+			}
+        {% endif %}
+	</style>
+	<script type="text/javascript">
+		var stickFooterToBottom = function() {
+			var top = $(".footer_seperator").position().top;
+			var mh = $(window).height();
+			var dh = mh - top - 60 - 25 - $("div.footer").height();
+			if (dh < 0) dh = 0;
+			$(".footer_seperator").height(dh);
+		};
+		
+		jQuery(window).load(stickFooterToBottom);
+		jQuery(window).resize(stickFooterToBottom);
+
+		jQuery(window).load(function() {
+			jQuery('img').click(function () {
+				$($(this).next()).click();
+			});
+			$('.collapse-card').click(function () {
+				$($(this).prev()).toggleClass("hovered");
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block body_content %}
+    <!-- Team Members Row -->
+    <div class="row">
+        <div class="col-lg-12">
+        	{% if en %}
+            <h1 class="page-header">Our Team</h2>
+            {% else %}
+            <h1 class="page-header">تیم ما</h2>
+            {% endif %}	
+        </div>
+        {% for user in users %}
+        <div class="col-lg-4 col-sm-6 text-center team-member">
+            <img class="img-circle img-responsive img-center" src="{{ user.profile.photo.url }}" width="200" height="200">
+            <div class="collapse-card">
+            	{% if en %}
+	            <div class="title">
+	                <!-- <i class="fa fa-question-circle fa-2x fa-fw"></i> -->
+	                <span>{{ user.profile.title }}</span>
+	                <strong>{{ user.get_full_name }}</strong>
+	            </div>
+	            <div class="body">
+	            	<p class="text member-desc">
+		                {{ user.profile.desc | safe }}
+	                </p>
+	            </div>
+	            {% else %}
+	            <div class="title">
+	                <!-- <i class="fa fa-question-circle fa-2x fa-fw"></i> -->
+	                <span>{{ user.profile.title_fa }}</span>
+	                <strong>{{ user.profile.name_fa }}</strong>
+	            </div>
+	            <div class="body">
+	            	<p class="text member-desc">
+		                {{ user.profile.desc_fa | safe }}
+	                </p>
+	            </div>
+	            {% endif %}
+	        </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Introduction Row -->
+    <div class="row">
+        <div class="col-lg-12">
+        	{% if en %}
+            <h2 class="page-header">About Us
+                <!-- <small>(by the way, It's Nice to Meet You!)</small> -->
+            </h2>
+            <p class="text">So who are we? basically a bunch of friends who gather together and code, play, watch movies, listen to music, you name it! :D More specifically, each one of us has certain unique skills and together, we try to put these skills into developing games for the most part, since games are fun! but we also make some useful apps. We'd love to hear your feedback so feel free to <a href="/{% if en %}en{% else %}fa{% endif %}/contact">contact us</a> anytime about anything! even if you just wanna say hello :)</p>
+            {% else %}
+            <h2 class="page-header">درباره ی ما
+                <!-- <small>(by the way, It's Nice to Meet You!)</small> -->
+            </h2>
+            <p class="text">ما یه سری دوست با مهارت های مختلف و متنوع هستیم که بیشتر دوست داریم بازی بسازیم تا چیز دیگه. البته برنامه های کاربردی هم میسازیم و کلا پایه ی هر پروژه ی جذابی هستیم. اگر از ما درخواستی دارید یا دوست دارید با ما ارتباط برقرار کنید میتونید از <a href="/{% if en %}en{% else %}fa{% endif %}/contact">اینجا</a> با ما تماس بگیرید. منتظر کارهای جدید ما باشید :)</p>
+            {% endif %}
+        </div>
+    </div>
+
+	<div class="row footer_seperator">
+		<div class="col-xs-12"></div>
+	</div>
+{% endblock %}

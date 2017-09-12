@@ -1,0 +1,394 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Make sure the <html> tag is set to the .full CSS class. -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Persian Home of PBTGames, ProBinTech Co.">
+	<meta name="keywords" content="ProBinTech,Games,download,iphone,ipad,android,ios,iOS, mac, Mac, pc, PC, play, Play, google chrome,android market,google play,bazaar,sibche,app world,samsung,nook,probintech, probintech games, pbtgames, mobile, games, entertainment, barfak, Barfak, shootyezarb, shoot ye zarb, شوت یه ضرب, برفک">
+    <meta name="author" content="mmbrian - mmbrian.com">
+	<meta name="copyright" content="ProBinTech Co.">
+
+    <meta name="google-site-verification" content="O3OLy-YrG9qJYrVy46iT4kzvseKgWWTZdKPqtkFvbi4" />
+	
+    <title>PBTGames - ProBinTech</title>
+
+    <!-- jQuery -->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/jquery-ui.min.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static "css/rotate.css" %}" rel="stylesheet">
+    <link href="{% static "css/navbar.css" %}" rel="stylesheet">
+    <link href="{% static "pbtgames_fa/css/main.css" %}" rel="stylesheet">
+
+    {% if en %}
+    <link href='http://fonts.googleapis.com/css?family=Overlock:900|Chewy|Handlee' rel='stylesheet' type='text/css'>
+    {% else %}
+    <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+    <link href="{% static "css/main_fonts.css" %}" rel="stylesheet">
+    {% endif %}
+
+    <style type="text/css">
+        /*html {
+            {% if cover %}
+                background: url({{ cover }}) no-repeat center center fixed;
+            {% else %}
+                background: url({% static "img/default_bg.jpg" %}) no-repeat center center fixed;
+            {% endif %}
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }*/
+
+        .navbar-toggle {
+            background-color: #333 !important;
+        }
+
+        /* Centeralize navbar: https://stackoverflow.com/questions/10939481/center-the-nav-in-twitter-bootstrap */
+        @media (min-width: 767px) {
+            .navbar .nav,
+            .navbar .nav > li {
+              float:none;
+              display:inline-block;
+              *display:inline; /* ie7 fix */
+              *zoom:1; /* hasLayout ie7 trigger */
+              vertical-align: top;
+            }
+            .navbar-collapse {
+              text-align:center;
+            }
+        }
+        /* End of centeralize navbar */
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        ul.navbar-menu li a {
+            color: #000 !important;
+        }
+        ul.navbar-menu li a {
+            border-bottom: 5px solid transparent; /* same as bg */
+            -webkit-transition: border-color 500ms ease;
+            -moz-transition: border-color 500ms ease;
+            -o-transition: border-color 500ms ease;
+            -ms-transition: border-color 500ms ease;
+            transition: border-color 500ms ease;
+        }
+        @media (min-width: 767px) {
+            ul.navbar-menu li a:hover {
+                border-bottom: 5px solid #000;
+            }
+        }
+
+        .navbar {
+            border: none;
+        }
+
+        {% if en %}
+        .navbar-menu {
+            float: left;
+        }
+        .navbar-header {
+            float: right;
+        }
+        ul.navbar-menu li a {
+            /*font-family: "Narm";*/
+            font-family: 'Overlock', cursive;
+            font-size: 22px;
+        }
+        @media (max-width: 767px) {
+            ul.navbar-menu li a:focus, ul.navbar-menu li a:hover {
+                color: #777 !important;
+            }
+            .navbar {
+                background-color: rgba(255, 255, 255, 0.7);
+            }
+            .navbar-menu {
+                float: left; 
+                direction: ltr;
+            }
+            .navbar-collapse {
+                clear: both !important;
+            }
+            ul.navbar-menu {
+                padding-left: 25px; /* 40 - 15 */
+            }
+            .navbar-brand {
+                position: absolute;
+                left: 0;
+            }
+        }
+
+        h1, p.text {
+            direction: ltr;
+        }
+        h1 {
+            font-family: 'Chewy', cursive;
+            font-size: 2.3em;
+            font-weight: normal;
+        }
+        p.text {
+            font-family: 'Handlee', cursive;
+        }
+        {% else %}
+        div.description {
+            float: right;
+        }
+        @media (max-width: 767px) {
+            div.description {
+                float: none;
+            }
+        }
+        {% endif %}
+
+        img.bg {
+          /* Set rules to fill background */
+          min-height: 100%;
+          min-width: 1366px;
+            
+          /* Set up proportionate scaling */
+          width: 100%;
+          height: auto;
+            
+          /* Set up positioning */
+          position: fixed;
+          top: 0;
+          left: 0;
+
+          z-index: 0;
+        }
+
+        @media screen and (max-width: 1366px) { /* Specific to this particular image */
+          img.bg {
+            left: 50%;
+            margin-left: -683px;   /* 50% */
+          }
+        }
+    </style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- /** Start Preloader **/ -->
+    <style type="text/css">
+        /* Preloader styles */
+        body {
+            overflow: hidden;
+        }
+        /* Preloader */
+        #preloader {
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            background-color:#fff;
+            z-index:9999; /* makes sure it stays on top */
+        }
+        #status {
+            width:64px;
+            height:64px;
+            position:absolute;
+            text-align: center;
+            vertical-align: center;
+            left:50%; /* centers the loading animation horizontally one the screen */
+            top:50%; /* centers the loading animation vertically one the screen */
+            margin-top: -32px;
+            margin-left: -32px;
+            {% if preloader %}
+                background-image:url({{ preloader }});
+            {% else %}
+                background-image:url({% static "img/default_preloader.png" %});
+            {% endif %}
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        /* Preloader styles */
+    </style>
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(window).load(function() { // makes sure the whole site is loaded
+            jQuery('#status').fadeOut(); // will first fade out the loading animation
+            jQuery('#preloader').delay(550).fadeOut('slow'); // will fade out the white DIV that covers the website.
+            jQuery('body').delay(550).css({'overflow':'visible'});
+
+            jQuery('div.description')
+                .draggable({ containment: "window" })
+                .removeAttr("style");
+        })
+        //]]>
+    </script>
+    <!-- /** End Preloader **/ -->
+
+    <!-- Language Selector -->
+    <style type="text/css">
+        {% if en %}
+        @font-face {
+          font-family: 'Ziba';
+          src: url('{% static "fonts/BZiba.eot?#" %}') format('eot'),  /* IE6–8 */
+               url('{% static "fonts/BZiba.woff" %}') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+               url('{% static "fonts/BZiba.ttf" %}') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+        }
+        {% endif %}
+
+        #lang-selector {
+            display: inline-block; 
+            position: fixed; 
+            left: -100px; 
+            bottom: 63px;
+            z-index: 9998; /* overlay - 1 */
+        }
+        .low_opacity {
+            background-color: rgba(0, 0, 0, 0.2) !important;
+        }
+        #lang-selector a {
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.8); 
+            color: #FFF; 
+            {% if en %}
+            font-family: 'Ziba';
+            font-size: 22px; 
+            {% else %}
+            font-family: 'Handlee', cursive;
+            font-size: 14px; 
+            {% endif %}
+            padding: 5px 7px 5px 13px;   
+
+            transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -webkit-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+        }
+        #lang-selector a:hover {
+            color: #777 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            window.lsw = jQuery("#lang-selector").width();
+        });
+        window.lsv = false;
+        jQuery(window).scroll(function() {
+            if (window.lsv == false) {
+                window.lsv = true;
+                jQuery("#lang-selector").animate({"left":"-" + window.lsw + "px"}, "fast");
+            }
+            clearTimeout(jQuery.data(this, 'scrollTimer'));
+            jQuery.data(this, 'scrollTimer', setTimeout(function() {
+                // Haven't scrolled in 750ms
+                jQuery("#lang-selector").animate({"left":"0px"}, "slow");
+                window.lsv = false;
+            }, 750));
+        }).mouseover(function() {
+            $("#lang-s-a").removeClass("low_opacity");
+        }).mouseout(function() {
+            $("#lang-s-a").addClass("low_opacity");
+        });
+
+        jQuery(window).load(function() {
+            setTimeout(function() {
+                // $("#lang-s-a").removeClass("low_opacity");
+                jQuery("#lang-selector").animate({"left":"0px"}, "slow");
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+    <!-- /** Start Preloader **/ -->
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status" class="rotating">
+        </div>
+    </div>
+    <!-- /** End Preloader **/ -->
+    <img class="bg" src="{% if cover %}{{ cover }}{% else %}{% static "img/default_bg.jpg" %}{% endif %}">    
+    <div id="lang-selector"><a id="lang-s-a" href="/{% if en %}fa{% else %}en{% endif %}{{ request.path|slice:"3:" }}">{% if en %}فا{% else %}EN{% endif %}</a></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- <a class="navbar-brand" href="/">ProBinTech</a> -->
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {% if en %}
+                <ul class="nav navbar-nav navbar-menu">
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/games/list">Games</a>
+                    </li>
+                    <li>
+                        <a href="#">Apps</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/about">About</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/contact">Contact</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="nav navbar-nav navbar-menu">
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/contact">تماس با ما</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/about">درباره ما</a>
+                    </li>
+                    <li>
+                        <a href="#">برنامه ها</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/games/list">بازی ها</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-6 col-md-6 description"> -->
+            <div style="position: fixed !important;" class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-7 description">
+                {% if title %}
+                    <h1><a href="/{% if en %}en{% else %}fa{% endif %}/{{game_slug}}">{{ title }}</a></h1>
+                {% else %}
+                    <h1>تیتر پیش فرض</h1>
+                {% endif %}
+                {% if desc %}
+                    <p class="text">{{ desc }}</p>
+                {% else %}
+                    <p class="text">اما چرخ روزگار با این اثر سر ناسازگاری داشت. پیروی محض از دستور حزب مبنی بر ممنوعیت مطالعه این اثر باعث شد که کمونیست ها و هوادارانشان به کتاب نزدیک نشده و حتی حاضر نباشند آن را به دست گیرند. دستور به کارگیری توطئه سکوت در خصوص این کتاب چنان محکم و قاطع بود که حتی نشریات بورژوایی در تبعید نیز حاضر به چاپ آگهی انتشار آن نبودند و نهایتا گشتاپو(پلیس مخفی آلمان نازی) کار را یک سره کرد و با دست یافتن به نسخه‌های این کتاب تمامی آن‌ها را نابود کرد... چرخ روزگار را بنگر که سرنوشت "بررسی روانشناختی خودکامگی" نیز این چنین بود. نوشته ای که روح زمانه توان تحمل آن را نداشت.</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</body>
+</html>

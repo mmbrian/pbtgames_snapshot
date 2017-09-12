@@ -1,0 +1,325 @@
+{% load static %}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Persian Home of PBTGames, ProBinTech Co.">
+    <meta name="keywords" content="ProBinTech,Games,download,iphone,ipad,android,ios,iOS, mac, Mac, pc, PC, play, Play, google chrome,android market,google play,bazaar,sibche,app world,samsung,nook,probintech, probintech games, pbtgames, mobile, games, entertainment, barfak, Barfak, shootyezarb, shoot ye zarb, شوت یه ضرب, برفک">
+    <meta name="author" content="mmbrian - mmbrian.com">
+    <meta name="copyright" content="ProBinTech Co.">
+
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- jQuery -->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/custom_bootstrap.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/rotate.css" %}" rel="stylesheet">
+    <link href="{% static "css/navbar.css" %}" rel="stylesheet">
+    <link href="{% static "css/skeleton.css" %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom Links, CSS, JS -->
+    {% block head_content %}{% endblock %}
+
+    <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+    {% if en %}
+    <link href='http://fonts.googleapis.com/css?family=Overlock:900' rel='stylesheet' type='text/css'>
+    {% else %}
+    <link href="{% static "css/main_fonts.css" %}" rel="stylesheet">
+    {% endif %}
+
+    <style type="text/css">
+        {% if en %}
+
+        .navbar-menu {
+            float: left;
+        }
+        .navbar-header {
+            float: right;
+        }
+        ul.navbar-menu li a {
+            /*font-family: "Narm";*/
+            font-family: 'Overlock', cursive;
+            font-size: 22px;
+        }
+        @media (max-width: 767px) {
+            .navbar-menu {
+                float: left; 
+                direction: ltr;
+            }
+            .navbar-collapse {
+                clear: both !important;
+            }
+            ul.navbar-menu {
+                padding-left: 25px; /* 40 - 15 */
+            }
+            .navbar-brand {
+                position: absolute;
+                left: 0;
+            }
+        }
+        {% endif %}
+    </style>
+
+    <!-- /** Start Preloader **/ -->
+    <style type="text/css">
+        /* Preloader styles */
+        body {
+            overflow: hidden;
+        }
+        /* Preloader */
+        #preloader {
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            background-color:#fff;
+            z-index:9999; /* makes sure it stays on top */
+        }
+        #status {
+            width:64px;
+            height:64px;
+            position:absolute;
+            text-align: center;
+            vertical-align: center;
+            left:50%; /* centers the loading animation horizontally one the screen */
+            top:50%; /* centers the loading animation vertically one the screen */
+            margin-top: -32px;
+            margin-left: -32px;
+            {% if preloader %}
+                background-image:url({{ preloader }});
+            {% else %}
+                background-image:url({% static "img/default_preloader.png" %});
+            {% endif %}
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        /* Preloader styles */
+    </style>
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(window).load(function() { // makes sure the whole site is loaded
+            jQuery('#status').fadeOut(); // will first fade out the loading animation
+            jQuery('#preloader').delay(550).fadeOut('slow'); // will fade out the white DIV that covers the website.
+            jQuery('body').delay(550).css({'overflow':'visible'});
+        })
+        //]]>
+    </script>
+    <!-- /** End Preloader **/ -->
+
+    {% if social %}
+    <script>
+        // (function(d, s, id) {
+        //   var js, fjs = d.getElementsByTagName(s)[0];
+        //   if (d.getElementById(id)) return;
+        //   js = d.createElement(s); js.id = id;
+        //   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+        //   fjs.parentNode.insertBefore(js, fjs);
+        // }(document, 'script', 'facebook-jssdk'));
+        jQuery(window).load(function() {
+          var d = document;
+          var s = 'script';
+          var id = 'facebook-jssdk';
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        });
+    </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    {% endif %}
+
+    <!-- Language Selector -->
+    {% if localized %}
+    <style type="text/css">
+        {% if en %}
+        @font-face {
+          font-family: 'Ziba';
+          src: url('{% static "fonts/BZiba.eot?#" %}') format('eot'),  /* IE6–8 */
+               url('{% static "fonts/BZiba.woff" %}') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+               url('{% static "fonts/BZiba.ttf" %}') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+        }
+        {% endif %}
+
+        #lang-selector {
+            display: inline-block; 
+            position: fixed; 
+            left: -100px; 
+            bottom: 63px;
+            z-index: 9998; /* overlay - 1 */
+        }
+        .low_opacity {
+            background-color: rgba(0, 0, 0, 0.2) !important;
+        }
+        #lang-selector a {
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.8); 
+            color: #FFF; 
+            {% if en %}
+            font-family: 'Ziba';
+            font-size: 22px; 
+            {% else %}
+            font-family: 'Handlee', cursive;
+            font-size: 14px; 
+            {% endif %}
+            padding: 5px 7px 5px 13px;   
+
+            transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -webkit-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+        }
+        #lang-selector a:hover {
+            color: #777 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            window.lsw = jQuery("#lang-selector").width();
+        });
+        window.lsv = false;
+        jQuery(window).scroll(function() {
+            if (window.lsv == false) {
+                window.lsv = true;
+                jQuery("#lang-selector").animate({"left":"-" + window.lsw + "px"}, "fast");
+            }
+            clearTimeout(jQuery.data(this, 'scrollTimer'));
+            jQuery.data(this, 'scrollTimer', setTimeout(function() {
+                // Haven't scrolled in 750ms
+                jQuery("#lang-selector").animate({"left":"0px"}, "slow");
+                window.lsv = false;
+            }, 750));
+        }).mouseover(function() {
+            $("#lang-s-a").removeClass("low_opacity");
+        }).mouseout(function() {
+            $("#lang-s-a").addClass("low_opacity");
+        });
+
+        jQuery(window).load(function() {
+            setTimeout(function() {
+                // $("#lang-s-a").removeClass("low_opacity");
+                jQuery("#lang-selector").animate({"left":"0px"}, "slow");
+            }, 1000);
+        });
+    </script>
+    {% endif %}
+</head>
+
+<body>
+    {% if social %}
+    <div id="fb-root"></div>
+    {% endif %}
+    {% if localized %}
+    <div id="lang-selector"><a id="lang-s-a" href="/{% if en %}fa{% else %}en{% endif %}{{ request.path|slice:"3:" }}">{% if en %}فا{% else %}EN{% endif %}</a></div>
+    {% endif %}
+
+    <!-- /** Start Preloader **/ -->
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status" class="rotating">
+        </div>
+    </div>
+    <!-- /** End Preloader **/ -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% if en %}
+                <a class="navbar-brand rightmost_menu_item" href="/">ProBinTech</a>
+                {% else %}
+                <a class="navbar-brand" href="/{% if en %}en{% else %}fa{% endif %}">ProBinTech</a>
+                {% endif %}
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {% if en %}
+                <ul class="nav navbar-nav navbar-menu">
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/games/list" class="leftmost_menu_item {% if games_selected %}selected{% endif %}">Games</a>
+                    </li>
+                    <li>
+                        <a href="#" class="{% if apps_selected %}selected{% endif %}">Apps</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/about" class="{% if about_selected %}selected{% endif %}">About</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/contact" class="{% if contact_selected %}selected{% endif %}">Contact</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="nav navbar-nav navbar-menu">
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/contact" class="{% if contact_selected %}selected{% endif %}">تماس با ما</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/about" class="{% if about_selected %}selected{% endif %}">درباره ما</a>
+                    </li>
+                    <li>
+                        <a href="#" class="{% if apps_selected %}selected{% endif %}">برنامه ها</a>
+                    </li>
+                    <li>
+                        <a href="/{% if en %}en{% else %}fa{% endif %}/games/list" class="rightmost_menu_item {% if games_selected %}selected{% endif %}">بازی ها</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        {% block body_content %}{% endblock %}
+
+
+        <!-- <hr> -->
+        <!-- Footer -->
+        <!-- <footer class="footer"> -->
+        <!-- <footer> -->
+        <div class="row footer">
+            <!-- <div class="container"> -->
+                <!-- <div class="row"> -->
+                    <div class="col-xs-offset-2 col-xs-8">
+                            <p class="copyright hcenter">Copyright &copy; ProBinTech 2015</p>
+                    </div>
+                <!-- </div> -->
+                <!-- /.row -->
+            <!-- </div> -->
+        </div>
+        <!-- </footer> -->
+    </div>
+    <!-- /.container -->
+</body>
+
+</html>

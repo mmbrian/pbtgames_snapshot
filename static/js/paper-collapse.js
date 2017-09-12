@@ -1,0 +1,37 @@
+(function() {
+  (function($) {
+    'use strict';
+    $.fn.paperCollapse = function(options) {
+      var settings;
+      settings = $.extend({}, $.fn.paperCollapse.defaults, options);
+      $(this).click(function() {
+        if ($(this).hasClass('active')) { // hiding
+          settings.onHide.call(this);
+          $(this).removeClass('active');
+          $(this).find('.body').slideUp(settings.animationDuration, settings.onHideComplete);
+        } else {
+          $('.collapse-card.active').click(); // hiding currently active box
+          settings.onShow.call(this);
+          $(this).addClass('active');
+          $(this).find('.body').slideDown(settings.animationDuration, settings.onShowComplete);
+        }
+      });
+      return this;
+    };
+    $.fn.paperCollapse.defaults = {
+      animationDuration: 400,
+      easing: 'swing',
+      onShow: function() {},
+      onHide: function() {},
+      onShowComplete: function() {},
+      onHideComplete: function() {}
+    };
+  })(jQuery);
+
+  (function($) {
+    $(function() {
+      $('.collapse-card').paperCollapse({});
+    });
+  })(jQuery);
+
+}).call(this);

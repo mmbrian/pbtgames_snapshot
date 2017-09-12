@@ -1,0 +1,135 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}Color Palette Visualizer{% endblock %}
+
+{% block head_content %}
+	<link href='http://fonts.googleapis.com/css?family=Original+Surfer|Handlee' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+	<style type="text/css">
+		div.color_row div {
+			height: 26px;
+			margin-bottom: 13px;
+		}
+
+		div.color_row div.disabled {
+			border: 3px dashed;
+		}
+
+		/* Sticky footer styles
+		-------------------------------------------------- */
+		body {
+			margin-bottom: 25px;
+		}
+
+		/* Custom styles
+		-------------------------------------------------- */
+		@media (max-width: 767px) {
+			.navbar {
+				margin-bottom: 20px;
+			}
+		}
+
+		h3, h2, h1 {
+			font-family: 'Original Surfer', cursive;
+			direction: ltr !important;
+		}
+
+		textarea {
+			font-family: 'Handlee', cursive !important;
+			direction: ltr !important;
+		}
+	</style>
+
+	<script type="text/javascript">
+		function ColorPaletteController($scope){
+			$scope.colors = [
+				// {
+				// 	code: '255, 0, 0',
+				// 	active:true
+				// },{
+				// 	code: '0, 255, 0',
+				// 	active:true
+				// }
+			];
+
+			// $scope.active_colors = 2;
+			$scope.active_colors = 0;	
+
+			$scope.updateColors = function(color_string) {
+				var codes = color_string.split(",");
+				if (codes.length % 3 == 0) {
+					var new_colors = [];
+					for (var i = 0; i<codes.length-2; i+=3) {
+						var new_color = {};
+						new_color['code'] = codes[i].trim() + ", " + codes[i+1].trim() + ", " + codes[i+2].trim();
+						new_color['active'] = true;
+						new_colors.push(new_color);
+					}
+					$scope.colors = new_colors;
+				}
+				$scope.updatePalette();
+			};
+
+			$scope.toggleActive = function(s){
+				if (s.active) {
+					$scope.active_colors--;
+				} else {
+					$scope.active_colors++;
+				}
+				s.active = !s.active;
+				$scope.updatePalette();
+			};
+
+			$scope.isActive = function(s){
+				if (!s.active)
+					return "disabled";
+			};
+
+			$scope.updatePalette = function(){
+				var selected_colors = "";
+				var actives = 0;
+				angular.forEach($scope.colors, function(s){
+					if (s.active){
+						selected_colors += s.code + ", ";
+						actives++;
+					}
+				});
+
+				$scope.active_colors = actives;
+				$scope.palette = selected_colors.substring(0, selected_colors.length - 2);
+			};
+		}
+
+		var hideFooter = function() {
+			$("div.footer").css({"display":"none"});
+		};
+		jQuery(window).load(hideFooter);
+	</script>
+{% endblock %}
+
+{% block body_content %}
+	{% verbatim %} 
+	<!-- Stops the template engine from rendering the contents of this block tag -->
+	<!-- Required so as to avoid conflict between template language and angularjs -->
+	<div ng-app ng-controller="ColorPaletteController">
+		<h2>Color Palette Visualizer</h2>
+		<hr/>
+		<div class="row" style="margin-bottom: 26px;">
+			<textarea class="col-xs-12" ng-model="color_string" ng-change="updateColors(color_string)" placeholder="Enter your colors (0, 12, 255, 24, 146, ...)"></textarea>
+		</div>
+		
+		<h3>Recognized {{ colors.length }} colors, {{active_colors}} active</h3>
+
+		<div class="row" style="margin-bottom: 13px;">
+			<textarea disabled class="col-xs-12" ng-model="palette"></textarea>
+		</div>
+		<hr/>
+		<div class="row color_row">
+			<div ng-repeat="color in colors" ng-click="toggleActive(color)" ng-class="{active:color.active}" style="background: rgba({{color.code}}, 1);" class="col-xs-1 {{isActive(color)}}">
+			</div>
+		</div>
+	</div>
+	{% endverbatim %}
+{% endblock %}

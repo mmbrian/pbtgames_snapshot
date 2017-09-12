@@ -1,0 +1,27 @@
+body {
+	background-image: url('../img/geometry2.png');
+}
+
+.main_container {
+	min-height: 100%;
+}
+
+.footer {
+    /*margin: 50px 0;*/
+    padding-top: 60px;
+}
+
+p.copyright, .english_text {
+	font-family: 'Varela Round', sans-serif;
+}
+
+h3 {
+	font-family: "Morvarid";
+}
+
+.text {
+	text-align: justify;
+	font-family: "Ziba";
+	font-size: 20px;
+	direction: rtl;
+}

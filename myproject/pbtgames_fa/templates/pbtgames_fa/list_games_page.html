@@ -1,0 +1,105 @@
+{% extends 'pbtgames_fa/layout/skeleton.html' %}
+{% load static %}
+
+{% block title %}PBTGames | Our Games{% endblock %}
+
+{% block head_content %}
+	<!-- Custom CSS -->
+    <link href="{% static "pbtgames_fa/css/list_games_page.css" %}" rel="stylesheet">
+
+    {% if en %}
+    <link href='http://fonts.googleapis.com/css?family=Original+Surfer|Handlee' rel='stylesheet' type='text/css'>
+    {% endif %}
+
+    <style type="text/css">
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        body {
+          margin-bottom: 25px;
+        }
+
+        {% if en %}
+          h3 {
+            font-family: 'Original Surfer', cursive;
+            direction: ltr !important;
+          }
+
+          p.text {
+              font-family: 'Handlee', cursive;
+              direction: ltr !important;
+          }
+        {% endif %}
+    </style>
+
+    <script type="text/javascript">
+      var stickFooterToBottom = function() {
+          var top = $(".footer_seperator").position().top;
+          var mh = $(window).height();
+          var dh = mh - top - 60 - 25 - $("div.footer").height();
+          if (dh < 0) dh = 0;
+          $(".footer_seperator").height(dh);
+      };
+
+      jQuery(window).load(stickFooterToBottom);
+      jQuery(window).resize(stickFooterToBottom);
+    </script>
+{% endblock %}
+
+{% block body_content %}
+
+{% for game in games %}
+<div class="row game_row">
+    <div class="col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-6 col-md-4 col-lg-3 vcenter game_icon_col">
+        <a href="/{% if en %}en{% else %}fa{% endif %}/{{ game.slug }}">
+            <div class="img-container">
+                <img class="img-xs-centered  img-responsive" src="{{ game.icon.url }}" alt="">
+            </div>
+        </a>
+    </div><!--
+    --><div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6 col-md-8 col-lg-9 vcenter" style="direction: rtl;">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3><a href="/{% if en %}en{% else %}fa{% endif %}/{{ game.slug }}">{% if en %}{{ game.name_en }}{% else %}{{ game.name }}{% endif %}</a></h3>
+                <p class="text">{% if en %}{{ game.premier_description_en }}{% else %}{{ game.premier_description }}{% endif %}</p>
+            </div>
+        </div>
+        <div class="row markets_container" style="text-align: center;">
+            {% if game.googleplay_link %}
+            <div class="col-sm-6 col-md-3 vcenter market_item">
+                <a href="{{ game.googleplay_link }}">
+                    <img alt="Get it on Google Play"
+                       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+                </a>
+            </div>{% endif %}{% if en or force_hide_sibche %}{% else %}{% if game.sibche_link %}<!--
+            --><div class="col-sm-6 col-md-3 vcenter market_item">
+                <a href="{{ game.sibche_link }}">
+                    <img alt="Get it on Sibche"
+                       src="{% static "pbtgames_fa/img/released-on-sibche.png" %}" width="129px"/>
+                </a>
+            </div>{% endif %}{% endif %}{% if game.appstore_link %}<!--
+            --><div class="col-sm-6 col-md-3 vcenter market_item" style="text-align: center;">
+                <a href="{{ game.appstore_link }}">
+                    <img alt="Get it on the App Store"
+                       src="{% static "pbtgames_fa/img/appstore_135x40.svg" %}" width="129px"/>
+                </a>
+            </div>{% endif %}{% if game.bazaar_link %}<!--
+            --><div class="col-sm-6 col-md-3 vcenter market_item" style="text-align: center;">
+                <a href="{{ game.bazaar_link }}">
+                    <img alt="Get it on Bazaar"
+                       src="{% static "pbtgames_fa/img/bazaar-badge-g.png" %}" width="129px"/>
+                </a>
+            </div>{% endif %}
+        </div>
+    </div>
+</div>
+{% if forloop.last %}
+<!-- Add no horizontal breaks -->
+{% else %}
+<hr>
+{% endif %}
+
+{% endfor %}
+<div class="row footer_seperator">
+  <div class="col-xs-12"></div>
+</div>
+{% endblock %}
