@@ -1,6 +1,5 @@
 Django==1.7.4
 MySQL-python==1.2.3
-PIL==1.1.7
 Pillow==2.6.1
 Unidecode==0.04.17
 django-appconf==0.6
